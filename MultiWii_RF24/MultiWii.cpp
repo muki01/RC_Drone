@@ -27,7 +27,11 @@ November  2013     V2.3
 #include "Protocol.h"
 #include "NRF24_RX.h"
 #include <Adafruit_NeoPixel.h>
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(3, 2, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(3, 2, NEO_GRB + NEO_KHZ800);
+unsigned long previousMillis = 0; 
+const int NeoPixel_cycleTime = 5;
+const int NeoPixel_Brightness = 10;
+uint16_t j = 0;
 
 #include <avr/pgmspace.h>
 
@@ -635,12 +639,8 @@ void setup() {
   pinMode(6,OUTPUT);
   pinMode(9,OUTPUT);
 
-  strip.begin();
-  strip.setBrightness(10);
-  strip.setPixelColor(0, strip.Color(0, 200, 0));
-  strip.setPixelColor(1, strip.Color(255, 0, 0));
-  strip.setPixelColor(2, strip.Color(0, 150, 255));
-  strip.show();
+  pixels.begin();
+  pixels.setBrightness(NeoPixel_Brightness);
 
   SerialOpen(0,SERIAL0_COM_SPEED);
   #if defined(PROMICRO)
@@ -837,8 +837,39 @@ void go_disarm() {
   }
 }
 
+uint32_t Wheel(byte WheelPos) {
+  WheelPos = 255 - WheelPos;
+  if (WheelPos < 85) {
+    return pixels.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+  }
+  if (WheelPos < 170) {
+    WheelPos -= 85;
+    return pixels.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+  }
+  WheelPos -= 170;
+  return pixels.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+}
+
+void rainbowCycle() {
+  if (millis() - previousMillis >= NeoPixel_cycleTime) {
+    previousMillis = millis();
+
+    for (uint16_t i = 0; i < pixels.numPixels(); i++) {
+      pixels.setPixelColor(i, Wheel(((i * 256 / pixels.numPixels()) + j) & 255));
+    }
+    pixels.show();
+    j++;
+
+    if (j >= 256 * 5) {
+      j = 0;
+    }
+  }
+}
+
 // ******** Main Loop *********
 void loop () {
+  rainbowCycle();
+
   static uint8_t rcDelayCommand; // this indicates the number of time (multiple of RC measurement at 50Hz) the sticks must be maintained to run or switch off motors
   static uint8_t rcSticks;       // this hold sticks position for command combos
   uint8_t axis,i;
