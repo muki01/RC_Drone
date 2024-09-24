@@ -1,7 +1,9 @@
-# RC Drone Project
-This project involves building a drone based on Multiwii. The drone communicates with the RC controller using the NRF24 RF module. Additionally, code has been integrated for the BMP280 barometer sensor and Adafruit Neopixel LEDs to control smart LEDs on the drone.
+# 🚁RC Drone Project
+This project features a drone control system developed based on the MultiWii software. It includes additional custom functions beyond the existing MultiWii capabilities.<br>
 
-# Features
+For an RC controller project using NRF24, check out [RC Controller Project](https://github.com/muki01/RC_Controller).
+
+# Added Features
 - NRF24 RF Module: Enables wireless communication between the drone and the RC controller.
 - BMP280 Barometer Sensor: Gathers highly accurate barometric pressure and temperature data, which can be used for more precise altitude control of the drone.
 - Adafruit Neopixel LED: Smart LEDs are mounted on the drone and can be controlled to display various light effects and color combinations.
@@ -16,7 +18,8 @@ This project involves building a drone based on Multiwii. The drone communicates
 - 3.7V 25C LiPo Battery
 - 4 x SI2300 SMD Mosfet
 - 4 x 1N5819 SMD Diod
-- 4 x 10K SMD Resistor
+- 4 x 10K SMD Resistors
+- 2 x 180K SMD Resistors
 - 4 x 8520 Motors
 - 4 x 65mm Propellers
 
