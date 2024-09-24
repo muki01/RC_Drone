@@ -82,12 +82,12 @@ void NRF24_Read_RC() {
   }
   
   nrf24_rcData[THROTTLE] =  map(MyData.throttle, 0, 255, 1000, 2000); //If your channels are inverted, reverse the map value. Example. From 1000 to 2000 ---> 2000 to 1000
-  nrf24_rcData[ROLL] =      map(MyData.yaw,      0, 255, 2000, 1000);
+  nrf24_rcData[ROLL] =      map(MyData.roll,      0, 255, 1000, 2000);
   nrf24_rcData[PITCH] =     map(MyData.pitch,    0, 255, 1000, 2000);
-  nrf24_rcData[YAW] =       map(MyData.roll,     0, 255, 2000, 1000);
+  nrf24_rcData[YAW] =       map(MyData.yaw,     0, 255, 1000, 2000);
 
   nrf24_rcData[AUX1] =       map(MyData.AUX1,     0, 1, 1000, 2000);
-  nrf24_rcData[AUX2] =       map(MyData.AUX2,     0, 1, 1000, 2000);
+  nrf24_rcData[AUX2] =       map(MyData.AUX2,     0, 255, 1000, 2000);
   
 }
 

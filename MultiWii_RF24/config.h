@@ -489,13 +489,9 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
   //#define OVERRIDE_LEDPIN_OFF                 PORTC &= ~(1<<1); // PORTB &= ~(1<<5);
   //#define OVERRIDE_LEDPIN_ON                  PORTC |= 1<<1;    // was PORTB |= (1<<5);
 
-  //#define OVERRIDE_BUZZERPIN_PINMODE          pinMode (A2, OUTPUT); // use A2 instead of d8
-  //#define OVERRIDE_BUZZERPIN_ON               PORTC |= 1<<2 //PORTB |= 1;
-  //#define OVERRIDE_BUZZERPIN_OFF              PORTC &= ~(1<<2); //PORTB &= ~1;
-
-  //#define OVERRIDE_BUZZERPIN_PINMODE          pinMode(7, OUTPUT);
-  //#define OVERRIDE_BUZZERPIN_ON               tone(7, 500);
-  //#define OVERRIDE_BUZZERPIN_OFF              noTone(7);
+  #define OVERRIDE_BUZZERPIN_PINMODE          pinMode(7, OUTPUT);
+  #define OVERRIDE_BUZZERPIN_ON               for (int i = 0; i < 100; i++) { digitalWrite(7, HIGH); delayMicroseconds(200); digitalWrite(7, LOW); delayMicroseconds(200); }
+  #define OVERRIDE_BUZZERPIN_OFF              digitalWrite(7, LOW);
 
 /*************************************************************************************************/
 /*****************                                                                 ***************/
@@ -505,10 +501,10 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
 
   /******                Serial com speed    *********************************/
     /* This is the speed of the serial interfaces */
-    #define SERIAL0_COM_SPEED 38400
-    #define SERIAL1_COM_SPEED 38400
-    #define SERIAL2_COM_SPEED 38400
-    #define SERIAL3_COM_SPEED 38400
+    #define SERIAL0_COM_SPEED 115200
+    #define SERIAL1_COM_SPEED 115200
+    #define SERIAL2_COM_SPEED 115200
+    #define SERIAL3_COM_SPEED 115200
 
     /* when there is an error on I2C bus, we neutralize the values during a short time. expressed in microseconds
        it is relevent only for a conf with at least a WMP */
@@ -885,8 +881,8 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
   /********************************************************************/
   /****                             Buzzer                         ****/
   /********************************************************************/
-    //#define BUZZER
-    //#define RCOPTIONSBEEP         // uncomment this if you want the buzzer to beep at any rcOptions change on channel Aux1 to Aux4
+    #define BUZZER
+    #define RCOPTIONSBEEP         // uncomment this if you want the buzzer to beep at any rcOptions change on channel Aux1 to Aux4
     //#define ARMEDTIMEWARNING 330  // (*) Trigger an alarm after a certain time of being armed [s] to save you lipo (if your TX does not have a countdown)
     //#define PILOTLAMP             //Uncomment if you are using a X-Arcraft Pilot Lamp
 
