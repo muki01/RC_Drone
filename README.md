@@ -18,3 +18,7 @@ This project involves building a drone based on Multiwii. The drone communicates
 - 4 x 1N5819 SMD Diod
 - 4 x 10K SMD Resistor
 - 4 x 8520 Motors
+- 4 x 65mm Propellers
+
+# Photos
+<img width=60% src="https://github.com/user-attachments/assets/d7c3f5a2-a1e1-4a20-971b-ac1bc6a9d7a8">
