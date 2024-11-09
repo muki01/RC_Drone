@@ -1,18 +1,13 @@
-/*  From iforced2D, changed by ELECTRONOOBS 11/04/2020
- *  This is the code used for a brushed drone. Motors are conencted to D3, D5, D6 and D9
- *  NRF24 is connected to D13, D12, D11, D7 and D10
- *  IMU is connected to A4 and A5
- *  Buzzer is connected on D8  
- *  Check the tutorial here: http://www.electronoobs.com/eng_arduino_tut117.php
- *  Schematic here: http://www.electronoobs.com/eng_arduino_tut117_sch1.php
- *  And the video here: https://youtu.be/J0x4ChjUS00
- *  
+
+/*
+ * MultiWii v2.4 with NRF24 and BMP280 Support made by Muki01
+ * This is the code used for a brushed drone. Motors are conencted to D3, D5, D6 and D9
+ * NRF24 is connected to D13, D12, D11, D7 and D10
+ * BMP280 is connected to A4 and A5
+ *
  * Go to NRF24_RX.cpp if you want to change CE and CSN line 17
- * Go to config.c to cahnge drone configuration
- * Go to output.cpp to change the output PWM signal values
  * To invert channels go to NRF24_RX.cpp line 84
- * 
- * 
+ *
  * Welcome to MultiWii.
  *
  * If you see this message, chances are you are using the Arduino IDE. That is ok.

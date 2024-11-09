@@ -132,6 +132,7 @@
       //#define GY_80           // Chinese 10 DOF with  L3G4200D ADXL345 HMC5883L BMP085, LLC
       //#define GY_85           // Chinese 9 DOF with  ITG3205 ADXL345 HMC5883L LLC
       //#define GY_86           // Chinese 10 DOF with  MPU6050 HMC5883L MS5611, LLC
+      #define GY_87 // Chinese 10 DOF with MPU6050 & QMC5883L
       //#define GY_88 // Chinese 10 DOF with MPU6050 HMC5883L BMP085, LLC
       //#define GY_521          // Chinese 6  DOF with  MPU6050, LLC
       //#define INNOVWORKS_10DOF // with ITG3200, BMA180, HMC5883, BMP085 available here http://www.diymulticopter.com
@@ -168,7 +169,7 @@
       //#define ITG3200
       //#define MPU3050
       //#define L3G4200D
-      #define MPU6050       //combo + ACC
+      //#define MPU6050       //combo + ACC
       //#define LSM330        //combo + ACC
       
       /* I2C accelerometer */
@@ -480,7 +481,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
 
   /* only enable any of this if you must change the default pin assignment, e.g. your board does not have a specific pin */
   /* you may need to change PINx and PORTx plus #shift according to the desired pin! */
-  //#define OVERRIDE_V_BATPIN                   A0 // instead of A3    // Analog PIN 3
+  #define OVERRIDE_V_BATPIN                   A3 // instead of A3    // Analog PIN 3
 
   //#define OVERRIDE_PSENSORPIN                 A1 // instead of A2    // Analog PIN 2
 
@@ -791,6 +792,7 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
       //#define LCD_TTY         // SERIAL LCD: useful to tweak parameters over cable with arduino IDE 'serial monitor'
       //#define LCD_ETPP        // I2C LCD: Eagle Tree Power Panel LCD, which is i2c (not serial)
       //#define LCD_LCD03       // I2C LCD: LCD03, which is i2c
+      //#define LCD_LCD03S      // SERIAL LCD: LCD03 whit serial 9600 baud comunication enabled.
       //#define OLED_I2C_128x64 // I2C LCD: OLED http://www.multiwii.com/forum/viewtopic.php?f=7&t=1350
       //#define OLED_DIGOLE     // I2C OLED from http://www.digole.com/index.php?productID=550
 
@@ -894,14 +896,14 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
        with R1=33k and R2=51k
        vbat = [0;1023]*16/VBATSCALE
        must be associated with #define BUZZER ! */
-    #define VBAT              // uncomment this line to activate the vbat code
-    #define VBATSCALE       42 // (*) (**) change this value if readed Battery voltage is different than real voltage
-    #define VBATNOMINAL     41 // 4.1V full battery nominal voltage - only used for lcd.telemetry
+    //#define VBAT              // uncomment this line to activate the vbat code
+    #define VBATSCALE       130 // (*) (**) change this value if readed Battery voltage is different than real voltage
+    #define VBATNOMINAL     100 // 12,6V full battery nominal voltage - only used for lcd.telemetry
     #define VBATLEVEL_WARN1 37 // (*) (**) 10,7V
     #define VBATLEVEL_WARN2  35 // (*) (**) 9.9V
     #define VBATLEVEL_CRIT   33 // (*) (**) 9.3V - critical condition: if vbat ever goes below this value, permanent alarm is triggered
-    #define NO_VBAT          16 // Avoid beeping without any battery
-    #define VBAT_OFFSET       -50 // offset in 0.1Volts, gets added to voltage value  - useful for zener diodes
+    #define NO_VBAT          5 // Avoid beeping without any battery
+    #define VBAT_OFFSET       1 // offset in 0.1Volts, gets added to voltage value  - useful for zener diodes
 
     /* for V BAT monitoring of individual cells
      * enable both VBAT and VBAT_CELLS
@@ -993,6 +995,8 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
 /****************  SECTION  7 - TUNING & DEVELOPER                                  **************/
 /*****************                                                                 ***************/
 /*************************************************************************************************/
+
+  #define VBAT_PRESCALER 16 // set this to 8 if vbatscale would exceed 255
 
   /**************************************************************************************/
   /********   special ESC with extended range [0-2000] microseconds  ********************/
@@ -1200,3 +1204,4 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
 /*************************************************************************************************/
 
 #endif /* CONFIG_H_ */
+

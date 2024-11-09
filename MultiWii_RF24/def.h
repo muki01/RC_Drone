@@ -125,6 +125,12 @@
   #define VBAT_CELLS_PINS {A0, A1, A2 }
   #define VBAT_CELLS_OFFSETS {0, 50, 83 }
   #define VBAT_CELLS_DIVS { 75, 122,  98 }
+#elif COPTERTEST == 10
+  #define Y6
+  #define CRIUS_AIO_PRO
+  #define LCD_LCD03S
+  #define SERIAL0_COM_SPEED 9600
+  #define LCD_CONF
 #elif defined(COPTERTEST)
   #error "*** this test is not yet defined"
 #endif
@@ -1297,6 +1303,17 @@
   #undef INTERNAL_I2C_PULLUPS
 #endif
 
+#if defined(GY_87)
+  #define MPU6050
+  #define QMC5883 
+  #define BMP085
+  #define ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  = -X; imu.accADC[PITCH]  = -Y; imu.accADC[YAW]  =  Z;}
+  #define GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] =  Y; imu.gyroADC[PITCH] = -X; imu.gyroADC[YAW] = -Z;}
+  #define MAG_ORIENTATION(X, Y, Z)  {imu.magADC[ROLL]  =  X; imu.magADC[PITCH]  =  Y; imu.magADC[YAW]  = -Z;}
+  #define MPU6050_I2C_AUX_MASTER // MAG connected to the AUX I2C bus of MPU6050
+  #undef INTERNAL_I2C_PULLUPS
+#endif
+
 #if defined(GY_88)
   #define MPU6050
   #define HMC5883
@@ -1642,7 +1659,7 @@
   #define ACC 0
 #endif
 
-#if defined(HMC5883) || defined(HMC5843) || defined(AK8975) || defined(MAG3110)
+#if defined(HMC5883) || defined(HMC5843) || defined(AK8975) || defined(MAG3110) || defined(QMC5883)
   #define MAG 1
 #else
   #define MAG 0
@@ -1954,12 +1971,12 @@
         #error "NUMBER_MOTOR is not set, most likely you have not defined any type of multicopter"
 #endif
 
-#if (defined(LCD_DUMMY) || defined(LCD_SERIAL3W) || defined(LCD_TEXTSTAR) || defined(LCD_VT100) || defined(LCD_TTY) || defined(LCD_ETPP) || defined(LCD_LCD03) || defined(OLED_I2C_128x64) ) || defined(OLED_DIGOLE)
+#if (defined(LCD_DUMMY) || defined(LCD_SERIAL3W) || defined(LCD_TEXTSTAR) || defined(LCD_VT100) || defined(LCD_TTY) || defined(LCD_ETPP) || defined(LCD_LCD03) || defined(LCD_LCD03S) || defined(OLED_I2C_128x64) ) || defined(OLED_DIGOLE)
   #define HAS_LCD
 #endif
 
 #if (defined(LCD_CONF) || defined(LCD_TELEMETRY)) && !(defined(HAS_LCD) )
-  #error "LCD_CONF or LCD_TELEMETRY defined, and choice of LCD not defined.  Uncomment one of LCD_SERIAL3W, LCD_TEXTSTAR, LCD_VT100, LCD_TTY or LCD_ETPP, LCD_LCD03, OLED_I2C_128x64, OLED_DIGOLE"
+  #error "LCD_CONF or LCD_TELEMETRY defined, and choice of LCD not defined.  Uncomment one of LCD_SERIAL3W, LCD_TEXTSTAR, LCD_VT100, LCD_TTY or LCD_ETPP, LCD_LCD03, LCD_LCD03S, OLED_I2C_128x64, OLED_DIGOLE"
 #endif
 
 #if defined(POWERMETER_SOFT) && !(defined(VBAT))

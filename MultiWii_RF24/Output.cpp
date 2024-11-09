@@ -51,7 +51,7 @@ void initializeServo();
 /***************         Software PWM & Servo variables            ********************/
 /**************************************************************************************/
 #if defined(PROMINI) || (defined(PROMICRO) && defined(HWPWM6)) || (defined(MEGA) && defined(MEGA_HW_PWM_SERVOS))
-  #if defined(NRF24_RX)
+   #if defined(NRF24_RX)
     volatile uint8_t atomicPWM_PIN5_lowState;
     volatile uint8_t atomicPWM_PIN5_highState;
     volatile uint8_t atomicPWM_PIN6_lowState;
@@ -426,8 +426,8 @@ void writeMotors() { // [1000;2000] => [125;250]
   motor[1] = (motor[1]-1000) << 1;
   motor[2] = (motor[2]-1000) << 1;
   motor[3] = (motor[3]-1000) << 1;
-  
-  
+
+
     #if (NUMBER_MOTOR > 0)
       #ifdef EXT_MOTOR_RANGE            // 490Hz
         OCR1A = ((motor[0]>>2) - 250);
@@ -1016,7 +1016,6 @@ void initializeServo() {
 /************             Motor software PWM generation              ******************/
 /**************************************************************************************/
 // SW PWM is only used if there are not enough HW PWM pins (for exampe hexa on a promini)
-// It will also be used for nRF24L01 receiver (pin 11 is used for SPI so using 6 instead).
 
 #if defined(NRF24_RX) || ((NUMBER_MOTOR > 4) && (defined(PROMINI) || defined(PROMICRO)))
 
